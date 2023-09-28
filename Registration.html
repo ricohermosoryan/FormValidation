@@ -60,6 +60,8 @@
     let password = document.querySelector('#password');
     let confirmPassword = document.querySelector('#confirmPassword');
 
+    // const validEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
     function errorMessage (input, message) {
       clearError(input);
       let span = document.createElement("span");
@@ -102,11 +104,9 @@
       }
       if (email.value.length <= 0) {
         errorMessage(email, "cannot be empty")
-      }else 
-      if (email.value != /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/){
-        errorMessage(email, "not a valid email")
-      }else 
-      {
+      }else if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value)){
+        errorMessage(email, "is not valid")
+      }else{
         clearError(email);
       }
       if (password.value.length <= 0) {
