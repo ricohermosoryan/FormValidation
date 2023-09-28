@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mx-auto h-screen flex items-center justify-center">
+    <div class="border h-4/5 w-1/3 flex flex-col items-center bg-slate-800 rounded-lg justify-center shadow-xl">
+      <h1 class="text-white text-4xl font-semibold h-20">Register</h1>
+        <form action="/" method="post" class="px-5 text-center" onsubmit="register(event)">
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">First Name</p>
+            <input type="text" name="FirstName" id="firstName" class="w-60"><br><br>
+          </div>
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">Middle Name</p>
+            <input type="text" name="MiddleName" id="middleName" class="w-60"><br>
+          </div>
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">Last Name</p>
+            <input type="text" name="LastName" id="lastName" class="w-60"><br><br>
+          </div>
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">User Name</p>
+            <input type="text" name="UserName" id="userName" class="w-60"><br><br>
+          </div>
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">Email</p>
+            <input type="text" name="Email" id="email" class="w-60"><br><br>
+          </div>
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">Password</p>
+            <input type="password" name="Password" id="password" class="w-60"><br><br>
+          </div>
+          <div class="h-20 w-80 text-center">
+            <p class="text-center text-white text-base">Confirm Password</p>
+            <input type="password" name="ConfirmPassword" id="confirmPassword" class="w-60"><br><br>
+          </div>
+          <button class="rounded-full border border-slate-500 text-white w-20" type="submit" id="btnSubmit">Log In</button><br>
+          <a href="Login.html" class="text-white ">Log In Here</a>
+        </form>
+    </div>
+    
+  </div>
+
+  <script>
+    let firstName = document.querySelector('#firstName');
+    let middleName = document.querySelector('#middleName');
+    let lastName = document.querySelector('#lastName');
+    let userName = document.querySelector('#userName');
+    let email = document.querySelector('#email');
+    let password = document.querySelector('#password');
+    let confirmPassword = document.querySelector('#confirmPassword');
+
+    function errorMessage (input, message) {
+      clearError(input);
+      let span = document.createElement("span");
+      span.classList = "text-red-600"
+      span.textContent = `${input.name} ${message}`;
+      input.parentElement.appendChild(span);
+    }
+
+    function clearError(input){
+      let count = input.parentElement.childElementCount;
+      if (count > 2) {
+        input.parentElement.removeChild(input.parentElement.lastElementChild);
+      }
+    }
+
+    function register(e) {
+      e.preventDefault();
+
+      if (firstName.value.length <= 0) {
+        errorMessage(firstName, "cannot be empty")
+      }else {
+        clearError(firstName);
+      }
+      if (middleName.value.length <= 0) {
+        errorMessage(middleName, "cannot be empty")
+      }else {
+        clearError(middleName);
+      }
+      if (lastName.value.length <= 0) {
+        errorMessage(lastName, "cannot be empty")
+      }else {
+        clearError(lastName);
+      }
+      if (userName.value.length <= 0) {
+        errorMessage(userName, "cannot be empty")
+      }else if(userName.value.length < 8) {
+        errorMessage(userName, "cannot be less than 8 characters.")
+      }else {
+        clearError(userName);
+      }
+      if (email.value.length <= 0) {
+        errorMessage(email, "cannot be empty")
+      }else 
+      if (email.value != /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/){
+        errorMessage(email, "not a valid email")
+      }else 
+      {
+        clearError(email);
+      }
+      if (password.value.length <= 0) {
+        errorMessage(password, "cannot be empty")
+      }else if(password.value.length < 8){
+        errorMessage(password, "cannot be less than 8 characters.")
+      }else{
+        clearError(password);
+      }
+      if (confirmPassword.value.length <=0 ){
+        errorMessage(confirmPassword, "cannot be empty")
+      }else if (password.value !== confirmPassword.value){
+        errorMessage(confirmPassword, "Passwords do not match")
+      }else{
+        clearError(confirmPassword);
+      }
+    }
+  </script>
+</body>
+</html>

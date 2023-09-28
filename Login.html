@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mx-auto h-screen flex items-center justify-center">
+    <div class="border h-80 w-96 flex flex-col items-center bg-slate-800 rounded-lg justify-center shadow-xl">
+      <h1 class="text-white text-4xl font-semibold h-20">Login</h1>
+        <form action="/" method="post" class="px-5 text-center" onsubmit="login(event)">
+          <div class="h-20 w-60 text-center" id="user">
+            <p class="text-center text-white text-base">User Name</p>
+            <input type="text" name="username" id="userName"><br> 
+          </div>
+          <div class="h-20 w-60 text-center">
+            <p class="text-center text-white text-base">Password</p>
+            <input type="password" name="password" id="password"><br>
+          </div>
+          <button class="rounded-full border border-slate-500 text-white w-20" type="submit" id="btnSubmit">Log In</button><br>
+          <a href="Registration.html" class="text-white">Register Here</a>
+        </form>
+    </div>
+    
+  </div>
+  <script>
+    let userName = document.querySelector('#userName');
+    let password = document.querySelector('#password');
+
+    function errorMessage (input, message) {
+      clearError(input);
+      let span = document.createElement("span");
+      span.classList = "text-red-600"
+      span.textContent = `${input.name} ${message}`;
+      input.parentElement.appendChild(span);
+    }
+
+    function clearError(input){
+      let count = input.parentElement.childElementCount;
+      if (count > 2) {
+        input.parentElement.removeChild(input.parentElement.lastElementChild);
+      }
+    }
+
+    function login(e) {
+      e.preventDefault();
+      
+      if (userName.value.length <= 0){
+        errorMessage(userName, "cannot be empty");
+      } else {
+        clearError(userName);
+      }
+
+      if (password.value.length <= 0) {
+        errorMessage(password, "cannot be empty");
+      } else {
+        clearError(password);
+        
+      }
+    }
+  </script>
+</body>
+</html>
